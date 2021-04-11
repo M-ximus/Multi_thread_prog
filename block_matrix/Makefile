@@ -2,8 +2,11 @@ CXXFLAGS = -std=c++11 -pthread -MD
 
 all: mul.out
 
-mul.out: benchmark.cpp block_matrix.cpp block_matrix.hpp
-	$(CXX) $(CXXFLAGS) -o $@ benchmark.cpp block_matrix.cpp
+mul.out: benchmark.o block_matrix.o
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 -include *.d
 
